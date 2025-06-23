@@ -29,13 +29,15 @@ def search(request):
         return redirect('home')
 
 # función utilizada para filtrar por el tipo del Pokemon
+# Una vez modificado el services.py que es la base para que esta funcion pueda cumplir su funcion se modifica la funcion en views.py que es
+# la encargada de mostrarlo en pantalla y funcione correctamente.
 def filter_by_type(request):
-    type = request.POST.get('type', '')
+    pokemon_type = request.POST.get('type', '')
 
-    if type != '':
-        images = [] # debe traer un listado filtrado de imágenes, segun si es o contiene ese tipo.
+    if pokemon_type != '': # Verifica que se haya enviado un tipo (que no esté vacío)
+        images = services.filterByType(pokemon_type) # Llamamos a la función del services.py que filtra los Pokémon por tipo
         favourite_list = []
-
+    #Esta parte ya estaba en el codigo pero si mal no entiendo por lo leeido en django es la encargada de renderizar el template de home.html
         return render(request, 'home.html', { 'images': images, 'favourite_list': favourite_list })
     else:
         return redirect('home')
