@@ -29,11 +29,11 @@ def filterByCharacter(name):
 
 # función que filtra las cards según su tipo.
 def filterByType(type_filter):
-    filtered_cards = []
-
-    for card in getAllImages():
-        # debe verificar si la casa de la card coincide con la recibida por parámetro. Si es así, se añade al listado de filtered_cards.
-        filtered_cards.append(card)
+    filtered_cards = [] #Lista Vacia donde voy a guardar los Pokemones filtrados por tipo
+#Esta parte del codigo va a recorrer las cards obtenidas por la API, filtrarlas por tipo y agregar la card que coincida a la lista nueva
+    for card in getAllImages(): 
+        if type_filter.lower() in [t.lower() for t in card.types]: #Me tome el atrevimiento de convertir los tipos de pokemones en minuscula para evitar futuros errores.
+            filtered_cards.append(card)#Agregamos a la lista nueva las cards filtradas
 
     return filtered_cards
 
